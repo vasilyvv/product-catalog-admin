@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+
+    <changeSet author="Aleksandr" id="02_insert_persons_data">
+        <sql>
+            insert into PERSON (ID, FIRST_NAME, LAST_NAME, LOGIN, PASSWORD, ROLE)
+              values (
+                nextval('PERSON_SEQ'),
+                'Иван',
+                'Иванов',
+                'admin',
+                '$2y$12$VUqSydDvfcqyZsb6tE/FKuh268DFXa5vG9.O1w7k1kCPF54zjt8Aq',
+                'ADMIN'
+              );
+
+            insert into PERSON (ID, FIRST_NAME, LAST_NAME, LOGIN, PASSWORD, ROLE)
+              values (
+                nextval('PERSON_SEQ'),
+                'Пётр',
+                'Петров',
+                'user',
+                '$2y$12$ZJJlHJ59uIw6LuZ2F7Fz2.VyOtUSi/.U8n0BBFTVYmnnmcYNWOthu',
+                'USER'
+              );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

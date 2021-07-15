@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+
+    <changeSet author="Aleksandr" id="01_create_persons_scheme">
+        <sql>
+            create table PERSON (
+              ID          bigint       not null,
+              FIRST_NAME  varchar(30)  not null,
+              LAST_NAME   varchar(30)  not null,
+              LOGIN       varchar(30)  not null,
+              PASSWORD    varchar(90)  not null,
+              ROLE		  varchar(30)  not null,
+
+              constraint PK_PERSON primary key (ID),
+              constraint CK_PERSON_ROLE check (ROLE in ('ADMIN', 'USER'))
+            );
+            create sequence PERSON_SEQ;
+
+            comment on table PERSON is 'Справочник "Категория"';
+            comment on column PERSON.FIRST_NAME is 'Имя';
+            comment on column PERSON.LAST_NAME is 'Фамилия';
+            comment on column PERSON.LOGIN is 'Фамилия';
+            comment on column PERSON.PASSWORD is 'Пароль';
+            comment on column PERSON.ROLE is 'Роль';
+        </sql>
+    </changeSet>
+</databaseChangeLog>
