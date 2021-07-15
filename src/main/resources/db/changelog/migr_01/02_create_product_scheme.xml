@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+
+    <changeSet author="Aleksandr" id="02_create_product_scheme">
+        <sql>
+            create table PRODUCT (
+              ID           bigint          not null,
+              NAME         varchar(30)     not null,
+              DESCRIPTION  varchar(30)     not null,
+              PRICE        numeric(10, 2)  not null,
+              IMAGE_PATH   varchar(80)     not null,
+              CATEGORY_ID  bigint          not null,
+              CREATE_DATE  date            not null,
+              STATUS       varchar(30)     not null,
+
+              constraint PK_PRODUCT primary key (ID),
+              constraint CK_PRODUCT_STATUS check (STATUS in ('ACTIVE', 'NOT_ACTIVE'))
+            );
+            create sequence PRODUCT_SEQ;
+
+            comment on table PRODUCT is 'Таблица "Продукты"';
+            comment on column PRODUCT.ID is 'Идентификатор';
+            comment on column PRODUCT.NAME is 'Наименование';
+            comment on column PRODUCT.DESCRIPTION is 'Описание';
+            comment on column PRODUCT.PRICE is 'Цена';
+            comment on column PRODUCT.IMAGE_PATH is 'Путь до изображения';
+            comment on column PRODUCT.CATEGORY_ID is 'Идентификатор категории';
+            comment on column PRODUCT.CREATE_DATE is 'Дата добавления';
+            comment on column PRODUCT.STATUS is 'Статус';
+        </sql>
+    </changeSet>
+</databaseChangeLog>
