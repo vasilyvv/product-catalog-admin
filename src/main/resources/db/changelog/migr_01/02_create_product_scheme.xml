@@ -15,7 +15,7 @@
               PRICE        numeric(10, 2)  not null,
               IMAGE_PATH   varchar(80)     not null,
               CATEGORY_ID  bigint          not null,
-              CREATE_DATE  date            not null,
+              CREATE_DATE  timestamp       not null,
               STATUS       varchar(30)     not null,
 
               constraint PK_PRODUCT primary key (ID),
