@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/**").hasAuthority(ROLES_READ.getPermission())
                 .antMatchers(HttpMethod.POST, "/api/**").hasAuthority(ROLES_WRITE.getPermission())
+                .antMatchers(HttpMethod.PUT, "/api/**").hasAuthority(ROLES_WRITE.getPermission())
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority(ROLES_WRITE.getPermission())
                 .anyRequest()
                 .authenticated()
@@ -44,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
