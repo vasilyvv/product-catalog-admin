@@ -1,1 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/product_catalog_admin
+    username: postgres
+    password: 123456
 
+  jpa:
+    properties:
+      hibernate: org.hibernate.dialect.PostgreSQL10Dialect
