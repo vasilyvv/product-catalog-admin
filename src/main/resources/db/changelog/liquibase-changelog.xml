@@ -8,4 +8,6 @@
 
     <include file="migr_01/01_create_category_scheme.xml" relativeToChangelogFile="true"/>
     <include file="migr_01/02_create_product_scheme.xml" relativeToChangelogFile="true"/>
+    <include file="migr_01/03_insert_categories_data.xml" relativeToChangelogFile="true"/>
+    <include file="migr_01/04_insert_products_data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

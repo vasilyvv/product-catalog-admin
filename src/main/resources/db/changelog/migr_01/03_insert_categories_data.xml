@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+
+    <changeSet author="Aleksandr" id="03_insert_categories_data">
+        <sql>
+            insert into CATEGORY (ID, NAME, SHORT_DESCRIPTION)
+              values (nextval('CATEGORY_SEQ'), 'Книги', 'Краткое описание 123');
+
+            insert into CATEGORY (ID, NAME, SHORT_DESCRIPTION)
+              values (nextval('CATEGORY_SEQ'), 'Спорт', 'Краткое описание 456');
+
+            insert into CATEGORY (ID, NAME, SHORT_DESCRIPTION)
+              values (nextval('CATEGORY_SEQ'), 'Одежда', 'Краткое описание 789');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

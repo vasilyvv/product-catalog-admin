@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+
+    <changeSet author="Aleksandr" id="04_insert_products_data">
+        <sql>
+            insert into PRODUCT (ID, NAME, DESCRIPTION, PRICE, IMAGE_PATH, CATEGORY_ID, CREATE_DATE, STATUS)
+              values (
+                nextval('PRODUCT_SEQ'),
+                '"Аэропорт" - Артур Хейли',
+                'Описание 123',
+                350.35,
+                '/home/website/pictures/picture1.png',
+                (select ID from CATEGORY where NAME = 'Книги'),
+                current_timestamp, 'ACTIVE'
+              );
+
+            insert into PRODUCT (ID, NAME, DESCRIPTION, PRICE, IMAGE_PATH, CATEGORY_ID, CREATE_DATE, STATUS)
+              values (
+                nextval('PRODUCT_SEQ'),
+                '"Точка обмана" - Дэн Браун',
+                'Описание 456',
+                420.17,
+                '/home/website/pictures/picture2.png',
+                (select ID from CATEGORY where NAME = 'Книги'),
+                current_timestamp,
+                'ACTIVE'
+              );
+
+            insert into PRODUCT (ID, NAME, DESCRIPTION, PRICE, IMAGE_PATH, CATEGORY_ID, CREATE_DATE, STATUS)
+              values (
+                nextval('PRODUCT_SEQ'),
+                '"Точка обмана" - Дэн Браун',
+                'Описание 456',
+                420.17,
+                '/home/website/pictures/picture3.png',
+                (select ID from CATEGORY where NAME = 'Одежда'),
+                current_timestamp,
+                'ACTIVE'
+              );
+
+            insert into PRODUCT (ID, NAME, DESCRIPTION, PRICE, IMAGE_PATH, CATEGORY_ID, CREATE_DATE, STATUS)
+              values (
+                nextval('PRODUCT_SEQ'),
+                'Куртка',
+                'Описание 456',
+                7520.75,
+                '/home/website/pictures/picture4.png',
+                (select ID from CATEGORY where NAME = 'Одежда'),
+                current_timestamp,
+                'ACTIVE'
+              );
+
+            insert into PRODUCT (ID, NAME, DESCRIPTION, PRICE, IMAGE_PATH, CATEGORY_ID, CREATE_DATE, STATUS)
+              values (
+                nextval('PRODUCT_SEQ'),
+                'Кеды',
+                'Описание 456',
+                3450.15,
+                '/home/website/pictures/picture5.png',
+                (select ID from CATEGORY where NAME = 'Одежда'),
+                current_timestamp,
+                'ACTIVE'
+              );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
