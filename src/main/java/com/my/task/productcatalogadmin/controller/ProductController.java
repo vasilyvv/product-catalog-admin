@@ -1,8 +1,8 @@
 package com.my.task.productcatalogadmin.controller;
 
-import com.my.task.productcatalogadmin.exception.ResourceNotFoundException;
 import com.my.task.productcatalogadmin.model.Product;
-import com.my.task.productcatalogadmin.repository.ProductRepository;
+import com.my.task.productcatalogadmin.model.ProductFilter;
+import com.my.task.productcatalogadmin.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,41 +25,28 @@ import static java.lang.Boolean.TRUE;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<Product> getAllProducts(@RequestBody ProductFilter productFilter) {
+        return productService.findProducts(productFilter);
     }
 
     @PostMapping("/products")
     public Product createProduct(@RequestBody Product product) {
-        product.setCreateDate(new Date());
-        return productRepository.save(product);
+        return productService.createProduct(product);
     }
 
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product doesn't exist with id : " + id));
-
-        product.setName(productDetails.getName());
-        product.setDescription(productDetails.getDescription());
-        product.setPrice(productDetails.getPrice());
-        product.setImagePath(productDetails.getImagePath());
-        product.setCategoryId(productDetails.getCategoryId());
-        product.setStatus(productDetails.getStatus());
-
-        Product updatedProduct = productRepository.save(product);
+        Product updatedProduct = productService.updateProduct(id, productDetails);
         return ResponseEntity.ok(updatedProduct);
     }
 
     @DeleteMapping("products/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable Long id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product doesn't exist with id : " + id));
+        productService.deleteProduct(id);
 
-        productRepository.delete(product);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", TRUE);
         return ResponseEntity.ok(response);
